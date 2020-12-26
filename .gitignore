@@ -1,0 +1,8 @@
+logs
+test
+run
+typings
+.github
+node_modules
+.travis.yml
+package-lock.json
