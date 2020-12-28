@@ -44,12 +44,12 @@ class RoomsManagerService extends Service {
 
   async create(data) {
     const room_id = uuidv1();
-    data.users.forEach(user => {
+    for (const user of data.users) {
       await this.app.mysql.insert('room_user', {
         user_id: user,
         room_id: room_id,
       });
-    });
+    }
     await this.app.mysql.insert('room', {
       _id: room_id,
       unread_count: 0,
