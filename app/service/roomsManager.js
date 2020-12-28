@@ -12,6 +12,7 @@ class RoomsManagerService extends Service {
       let users = [];
       // 只能用於一對一的聊天，多人會出問題。
       let avatar;
+      let roomName;
       for (const result of results) {
         const user = await this.app.mysql.get("user", { _id: result.user_id });
         users.push({
@@ -23,9 +24,15 @@ class RoomsManagerService extends Service {
             last_changed: user.last_changed,
           }
         });
-        if (user._id != id) avatar = user.avatar;
+        if (user._id != id) {
+          avatar = user.avatar;
+          roomName = user.username;
+        }
       }
       delete room.user_id;
+      delete room._id;
+      room.roomId = room.room_id
+      room.roomName = roomName;
       room.users = users;
       room.avatar = avatar;
     }
