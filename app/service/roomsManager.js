@@ -40,12 +40,12 @@ class RoomsManagerService extends Service {
     return rooms;
   }
 
-  async isFriend(id) {
+  async isFriend(id, other) {
     let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [ id ]);
     for (const room of rooms) {
       const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [ room.room_id ]);
       for (const result of results) {
-        if (result.user_id == id) return true;
+        if (result.user_id == other) return true;
       }
     }
     return false;

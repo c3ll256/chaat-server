@@ -24,7 +24,7 @@ class RoomsController extends Controller {
         result = await service.roomsManager.show(id);
         break;
       case "isfriend":
-        result = await service.roomsManager.isFriend(id);
+        result = await service.roomsManager.isFriend(id, ctx.query.id);
         break;
       default:
         break;
