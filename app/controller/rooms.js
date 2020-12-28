@@ -15,11 +15,21 @@ class RoomsController extends Controller {
 
   async show() {
     const { ctx, service } = this;
-    const id = ctx.params.id;
-    console.log(id);
-    const result = await service.roomsManager.show(id);
+    const room_id = ctx.params.id;
+    const operate = ctx.query.operate;
+    let result;
+    
+    switch (operate) {
+      case "showrooms":
+        result = await service.roomsManager.show(id);
+        break;
+      case "isfriend":
+        result = await service.roomsManager.isFriend(id);
+        break;
+      default:
+        break;
+    }
     ctx.response.body = result;
-    ctx.status = 200;
   }
 }
 
