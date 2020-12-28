@@ -25,6 +25,7 @@ class RoomsManagerService extends Service {
         });
         if (user._id != id) avatar = user.avatar;
       }
+      delete room.user_id;
       room.users = users;
       room.avatar = avatar;
     }
