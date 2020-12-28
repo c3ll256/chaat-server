@@ -6,7 +6,7 @@ const { v1: uuidv1 } = require('uuid');
 
 class RoomsManagerService extends Service {
   async show(id) {
-    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE users = ?", [ id ]);
+    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [ id ]);
     for (const room of rooms) {
       const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [ room.room_id ]);
       let users = [];
@@ -32,7 +32,7 @@ class RoomsManagerService extends Service {
   }
 
   async isFriend(id) {
-    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE users = ?", [ id ]);
+    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [ id ]);
     for (const room of rooms) {
       const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [ room.room_id ]);
       for (const result of results) {
