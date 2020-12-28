@@ -24,18 +24,14 @@ class MessageManagerService extends Service {
     return updateSuccess;
   }
 
-  async get_new() {
-    
-  }
-
   async create(message) {
     const result = await this.app.mysql.insert('message', message);
     const options = {
       where: {
-        roomId: message.room_id
+        _id: message.room_id
       }
     };
-    await this.app.mysql.update('room', { lastMessageId: result.insertId }, options);
+    await this.app.mysql.update('room', { last_message_id: result.insertId }, options);
     return result
   }
 }
