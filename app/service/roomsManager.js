@@ -77,7 +77,7 @@ class RoomsManagerService extends Service {
       const user1 = await this.app.mysql.get('user', {_id: data.users[1]});
       const room =   {
         roomId: room_id,
-        roomName: data.users[0],
+        roomName: user0.username,
         avatar: user0.avatar,
         users: [
           {
@@ -100,7 +100,7 @@ class RoomsManagerService extends Service {
           }
         ],
       }
-      this.ctx.socket.emit('room', room);
+      this.app.io.of('/').emit('room', room);
       return room_id;
     }
   }
