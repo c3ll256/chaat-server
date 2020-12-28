@@ -52,19 +52,24 @@ class RoomsManagerService extends Service {
   }
 
   async create(data) {
-    const room_id = uuidv1();
-    for (const user of data.users) {
-      await this.app.mysql.insert('room_user', {
-        user_id: user,
-        room_id: room_id,
+    const isFriend = await this.isFriend(data.users[0], data.users[1]);
+    if (isFriend == true) {
+      return false
+    } else {
+      const room_id = uuidv1();
+      for (const user of data.users) {
+        await this.app.mysql.insert('room_user', {
+          user_id: user,
+          room_id: room_id,
+        });
+      }
+      await this.app.mysql.insert('room', {
+        _id: room_id,
+        unread_count: 0,
+        last_message_id: 0,
       });
+      return room_id;
     }
-    await this.app.mysql.insert('room', {
-      _id: room_id,
-      unread_count: 0,
-      last_message_id: 0,
-    });
-    return room_id;
   }
 }
 
