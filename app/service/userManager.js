@@ -29,6 +29,8 @@ class UserManagerService extends Service {
 
   async show(id) {
     const result = await this.app.mysql.get('user', { _id: id });
+    if (result == "")
+      return false;
     return result;
   }
 }
