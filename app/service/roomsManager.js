@@ -29,13 +29,13 @@ class RoomsManagerService extends Service {
           roomName = user.username;
         }
       }
-      delete room.room_id;
-      delete room.user_id;
-      delete room._id;
       room.roomId = room.room_id
       room.roomName = roomName;
       room.users = users;
       room.avatar = avatar;
+      delete room.room_id;
+      delete room.user_id;
+      delete room._id;
     }
     return rooms;
   }
