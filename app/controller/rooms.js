@@ -26,6 +26,9 @@ class RoomsController extends Controller {
       case "isfriend":
         result = await service.roomsManager.isFriend(id, ctx.query.id);
         break;
+      case "lastmessageid":
+        result = await service.roomsManager.getLastMessageId(id);
+        break;
       default:
         break;
     }

@@ -51,6 +51,11 @@ class RoomsManagerService extends Service {
     return false;
   }
 
+  async getLastMessageId(id) {
+    const result = await this.app.mysql.get("room", {_id: id});
+    return result.last_message_id;
+  }
+
   async create(data) {
     const isFriend = await this.isFriend(data.users[0], data.users[1]);
     if (isFriend == true) {
