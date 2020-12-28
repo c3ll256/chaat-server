@@ -15,7 +15,7 @@ class RoomsController extends Controller {
 
   async show() {
     const { ctx, service } = this;
-    const room_id = ctx.params.id;
+    const id = ctx.params.id;
     const operate = ctx.query.operate;
     let result;
     
