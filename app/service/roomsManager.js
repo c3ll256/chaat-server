@@ -73,6 +73,34 @@ class RoomsManagerService extends Service {
         unread_count: 0,
         last_message_id: 0,
       });
+      const user0 = await this.app.mysql.get('user', {_id: data.users[0]});
+      const user1 = await this.app.mysql.get('user', {_id: data.users[1]});
+      const room =   {
+        roomId: room_id,
+        roomName: data.users[0],
+        avatar: user0.avatar,
+        users: [
+          {
+            _id: data.users[0],
+            username: user0.username,
+            avatar: user0.avatar,
+            status: {
+              state: user0.status,
+              last_changed: user0.last_changed,
+            }
+          },
+          {
+            _id: data.users[1],
+            username: user1.username,
+            avatar: user1.avatar,
+            status: {
+              state: user1.status,
+              last_changed: user1.last_changed,
+            }
+          }
+        ],
+      }
+      this.ctx.socket.emit('room', room);
       return room_id;
     }
   }
