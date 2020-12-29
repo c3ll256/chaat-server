@@ -2,6 +2,7 @@
 
 const Service = require('egg').Service;
 
+const DayJs = require('dayjs');
 const { v1: uuidv1 } = require('uuid');
 
 class RoomsManagerService extends Service {
@@ -16,12 +17,12 @@ class RoomsManagerService extends Service {
       for (const result of results) {
         const user = await this.app.mysql.get("user", { _id: result.user_id });
         users.push({
-          _id: user._id,
+          _id: user._id.toString(),
           username: user.username,
           avatar: user.avatar,
           status: {
             state: user.status,
-            last_changed: user.last_changed,
+            last_changed: DayJs(user.last_changed).format('YYYY-MM-DD HH:mm:ss'),
           }
         });
         if (user._id != id) {
@@ -86,7 +87,7 @@ class RoomsManagerService extends Service {
             avatar: user0.avatar,
             status: {
               state: user0.status,
-              last_changed: user0.last_changed,
+              last_changed: DayJs(user0.last_changed).format('YYYY-MM-DD HH:mm:ss'),
             }
           },
           {
@@ -95,7 +96,7 @@ class RoomsManagerService extends Service {
             avatar: user1.avatar,
             status: {
               state: user1.status,
-              last_changed: user1.last_changed,
+              last_changed: DayJs(user1.last_changed).format('YYYY-MM-DD HH:mm:ss'),
             }
           }
         ],

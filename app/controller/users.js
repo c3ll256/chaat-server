@@ -28,12 +28,9 @@ class UsersController extends Controller {
     const { operate, data } = ctx.request.body;
     let result;
 
-    console.log(id);
-
     switch (operate) {
       case "update_status":
-        result = await service.userManager.update_status(id, data.status);
-        console.log(data);
+        result = await service.userManager.update_status(id, data.status, data.last_changed);
         break;
       default:
         break;

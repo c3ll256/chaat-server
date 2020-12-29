@@ -16,13 +16,13 @@ class UserManagerService extends Service {
     return result;
   }
 
-  async update_status(id, status) {
+  async update_status(id, status, last_changed) {
     const options = {
       where: {
         _id: id
       }
     };
-    const result = await this.app.mysql.update('user', {status: status}, options);
+    const result = await this.app.mysql.update('user', {status: status, last_changed: last_changed}, options);
     const updateSuccess = result.affectedRows === 1;
     return updateSuccess;
   }
