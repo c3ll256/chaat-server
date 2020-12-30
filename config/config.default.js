@@ -2,6 +2,8 @@
 
 'use strict';
 
+const configJson = require('./config.json')
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -74,7 +76,10 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
-    // myAppName: 'egg',
+    cos: {
+      SecretId: configJson.cos.SecretId,
+      SecretKey: configJson.cos.SecretKey,
+    }
   };
 
   return {
