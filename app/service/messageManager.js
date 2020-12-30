@@ -31,7 +31,7 @@ class MessageManagerService extends Service {
         _id: message.room_id
       }
     };
-    await this.app.mysql.update('room', { last_message_id: result.insertId }, options);
+    await this.app.mysql.update('room', { last_message_id: result.insertId, last_changed: message.time }, options);
     return result
   }
 }

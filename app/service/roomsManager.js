@@ -7,7 +7,7 @@ const { v1: uuidv1 } = require('uuid');
 
 class RoomsManagerService extends Service {
   async show(id) {
-    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [id]);
+    let rooms = await this.app.mysql.query("SELECT * FROM room_user LEFT JOIN room ON room_user.room_id = room._id WHERE user_id = ? ORDER BY last_changed DESC;", [id]);
     for (const room of rooms) {
       const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [room.room_id]);
       let users = [];
@@ -73,6 +73,7 @@ class RoomsManagerService extends Service {
         _id: room_id,
         unread_count: 0,
         last_message_id: 0,
+        last_changed: DayJs().format('YYYY-MM-DD HH:mm:ss')
       });
       const user0 = await this.app.mysql.get('user', { _id: data.users[0] });
       const user1 = await this.app.mysql.get('user', { _id: data.users[1] });
