@@ -10,10 +10,10 @@ class ChaatController extends Controller {
     const room = message.room_id;
 
     try {
-      const result  = await this.service.messageManager.create(message)
+      const result = await this.service.messageManager.create(message)
       message._id = result.insertId
       nsp.emit('chaat', message);
-      
+
     } catch (error) {
       app.logger.error(error);
     }

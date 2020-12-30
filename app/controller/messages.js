@@ -8,7 +8,7 @@ class ChatsController extends Controller {
     const room_id = ctx.params.id;
     const operate = ctx.query.operate;
     let result;
-    
+
     switch (operate) {
       case "oldest":
         result = await service.messageManager.get_oldest(room_id);
