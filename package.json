@@ -1,6 +1,10 @@
 {
   "name": "chaat-server",
+<<<<<<< HEAD
   "version": "1.0.3",
+=======
+  "version": "1.0.2",
+>>>>>>> 91c980602f4c2da6755e757f8a87181aad44a091
   "description": "",
   "private": true,
   "egg": {
