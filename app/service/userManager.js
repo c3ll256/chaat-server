@@ -1,7 +1,7 @@
 'use strict';
 const Service = require('egg').Service;
 
-const Dayjs  = require('dayjs');
+const Dayjs = require('dayjs');
 const { v1: uuidv1 } = require('uuid');
 
 class UserManagerService extends Service {
@@ -12,7 +12,7 @@ class UserManagerService extends Service {
       status: "online",
       last_changed: Dayjs().format("YYYY-MM-DD HH:mm:ss"),
     });
-    
+
     return result;
   }
 
@@ -22,8 +22,13 @@ class UserManagerService extends Service {
         _id: id
       }
     };
-    const result = await this.app.mysql.update('user', {status: status, last_changed: last_changed}, options);
+    const result = await this.app.mysql.update('user', { status: status, last_changed: last_changed }, options);
     const updateSuccess = result.affectedRows === 1;
+    if (updateSuccess) this.app.io.of('/').emit('status', {
+      _id: id,
+      status: status,
+      last_changed: last_changed
+    });
     return updateSuccess;
   }
 

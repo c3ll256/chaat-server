@@ -7,9 +7,9 @@ const { v1: uuidv1 } = require('uuid');
 
 class RoomsManagerService extends Service {
   async show(id) {
-    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [ id ]);
+    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [id]);
     for (const room of rooms) {
-      const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [ room.room_id ]);
+      const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [room.room_id]);
       let users = [];
       // 只能用於一對一的聊天，多人會出問題。
       let avatar;
@@ -42,9 +42,9 @@ class RoomsManagerService extends Service {
   }
 
   async isFriend(id, other) {
-    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [ id ]);
+    let rooms = await this.app.mysql.query("SELECT * FROM room_user WHERE user_id = ?", [id]);
     for (const room of rooms) {
-      const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [ room.room_id ]);
+      const results = await this.app.mysql.query("SELECT * FROM room_user WHERE room_id = ?", [room.room_id]);
       for (const result of results) {
         if (result.user_id == other) return true;
       }
@@ -53,7 +53,7 @@ class RoomsManagerService extends Service {
   }
 
   async getLastMessageId(id) {
-    const result = await this.app.mysql.get("room", {_id: id});
+    const result = await this.app.mysql.get("room", { _id: id });
     return result.last_message_id;
   }
 
@@ -74,9 +74,9 @@ class RoomsManagerService extends Service {
         unread_count: 0,
         last_message_id: 0,
       });
-      const user0 = await this.app.mysql.get('user', {_id: data.users[0]});
-      const user1 = await this.app.mysql.get('user', {_id: data.users[1]});
-      const room =   {
+      const user0 = await this.app.mysql.get('user', { _id: data.users[0] });
+      const user1 = await this.app.mysql.get('user', { _id: data.users[1] });
+      const room = {
         roomId: room_id,
         roomName: user0.username,
         avatar: user0.avatar,

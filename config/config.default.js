@@ -19,7 +19,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.security = {
-    domainWhiteList: [ 'http://localhost:8080' ],
+    domainWhiteList: ['http://localhost:8080'],
     csrf: {
       enable: false,
     },
@@ -28,11 +28,11 @@ module.exports = appInfo => {
   exports.io = {
     namespace: {
       '/': {
-        connectionMiddleware: [ ],
-        packetMiddleware: [ ],
+        connectionMiddleware: [],
+        packetMiddleware: [],
       },
     },
-  
+
     // cluster 模式下，通过 redis 实现数据共享
     redis: {
       host: '127.0.0.1',
@@ -40,7 +40,7 @@ module.exports = appInfo => {
       port: 6379,
     },
   };
-  
+
   // 可选
   exports.redis = {
     client: {
@@ -64,7 +64,7 @@ module.exports = appInfo => {
       password: '19841001',
       // 数据库名
       database: 'chaat',
-      charset : 'utf8mb4',
+      charset: 'utf8mb4',
     },
     // 是否加载到 app 上，默认开启
     app: true,

@@ -18,7 +18,7 @@ class RoomsController extends Controller {
     const id = ctx.params.id;
     const operate = ctx.query.operate;
     let result;
-    
+
     switch (operate) {
       case "showrooms":
         result = await service.roomsManager.show(id);
