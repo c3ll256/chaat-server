@@ -3,6 +3,9 @@ test
 run
 typings
 .github
+.idea
+.vscode
+.history
 node_modules
 .travis.yml
 package-lock.json
