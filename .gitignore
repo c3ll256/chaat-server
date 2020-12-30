@@ -9,3 +9,4 @@ typings
 node_modules
 .travis.yml
 package-lock.json
+config.json
