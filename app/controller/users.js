@@ -32,6 +32,12 @@ class UsersController extends Controller {
       case "update_status":
         result = await service.userManager.update_status(id, data.status, data.last_changed);
         break;
+      case "update_avatar":
+        result = await service.userManager.update_avatar(id, data.avatar);
+        break;
+      case "update_username":
+        result = await service.userManager.update_username(id, data.username);
+        break;
       default:
         break;
     }

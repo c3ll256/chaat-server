@@ -32,6 +32,28 @@ class UserManagerService extends Service {
     return updateSuccess;
   }
 
+  async update_avatar(id, avatar) {
+    const options = {
+      where: {
+        _id: id
+      }
+    };
+    const result = await this.app.mysql.update('user', { avatar: avatar }, options);
+    const updateSuccess = result.affectedRows === 1;
+    return updateSuccess;
+  }
+
+  async update_username(id, username) {
+    const options = {
+      where: {
+        _id: id
+      }
+    };
+    const result = await this.app.mysql.update('user', { username: username }, options);
+    const updateSuccess = result.affectedRows === 1;
+    return updateSuccess;
+  }
+
   async show(id) {
     const result = await this.app.mysql.get('user', { _id: id });
     if (result == "")
